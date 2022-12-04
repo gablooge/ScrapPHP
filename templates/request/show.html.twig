@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">ScrapPHP</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary float-left">{{ request_data.url }}</h6>
+            <a href="{{ path('app_request') }}" class="btn btn-sm btn-light btn-icon-split float-right">
+                <span class="icon text-gray">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Back</span>
+            </a>
+        </div>
+        <div class="card-body table-responsive">
+
+            <dl>
+                <dt>ID</dt>
+                <dd>{{ request_data.id }}</dd>
+                <dt>URL</dt>
+                <dd>{{ request_data.url }}</dd>
+                <dt>Request Time</dt>
+                <dd>{{ request_data.startedTime|date("F jS \\a\\t H:i:s") }}</dd>
+                <dt>Request Duration</dt>
+                {% set difference = request_data.endTime.diff(request_data.startedTime) %}
+                <dd>{{ difference|date("%s") }} seconds</dd>
+                <dt>HTML Tags</dt>
+                <dd>
+                    <table class="table table-striped">
+                        <thead>
+                            <th width=10>No</th>
+                            <th>Tag</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            {% if request_data | length > 0 %}
+                                {% for tag, count in request_data.tags|sort|reverse %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ tag }}</td>
+                                        <td>{{ count }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center"> Data Not Found </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    </table>
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

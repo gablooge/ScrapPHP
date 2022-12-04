@@ -18,3 +18,12 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> phplint ###
+.phplint-cache
+###< phplint ###
+
+###> Mac ###
+.DS_Store
+**/.DS_Store
+###< Mac ###

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">ScrapPHP</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary float-left">Add URL</h6>
+            <a href="{{ path('app_request') }}" class="btn btn-sm btn-light btn-icon-split float-right">
+                <span class="icon text-gray">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Back</span>
+            </a>
+        </div>
+        <div class="card-body table-responsive">
+
+            <form class="form-horizontal" action="{{ path('app_request_form_action') }}" method="post">
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <input type="url" class="form-control" id="url" placeholder="https://www.google.com" name="url" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-sm btn-success float-right">Scrap it</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

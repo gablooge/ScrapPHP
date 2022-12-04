@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Web Scrapper Application</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary float-left">Scrapped URLs</h6>
+            <a href="{{ path('app_request_form') }}" class="float-right btn btn-success">Add</a>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <th width=10>No</th>
+                    <th>URL</th>
+                    <th>HTML Tags</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% if request_data | length > 0 %}
+                        {% for data in request_data %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ data.url }}</td>
+                            <td>{{ data.tags|length }}</td>
+                            <td><a href="{{ path('app_request_show',{id:data.id}) }}" class="btn btn-info">View</a> <a href="{{ path('app_request_delete',{id:data.id}) }}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center"> Data Not Found </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
